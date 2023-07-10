@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Podcasts</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/superkube@latest/dist/superkube.min.css">
+</head>
+<body>
+
+<nav class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item active">
+            <span class="breadcrumb-link">Podcasts</span>
+        </li>
+    </ul>
+</nav>
+
+<main class="main">
+    <div class="content py-15">
+        <div class="content-container container centered edges grid grid-3">
+            {% for podcast in podcasts %}
+                <div class="column card px-6 py-8 shadow-200 radius-large bg-light">
+                    <div class="card-icon mb-6">
+                        <figure class="image-128">
+                            <img src="{{ podcast['id'] }}/cover.jpg"/>
+                        </figure>
+                    </div>
+                    <div class="card-head">
+                        <a href="{{ podcast['id'] }}">
+                            <h3 class="heading-medium">{{ podcast['title'] }}</h3>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+</body>
+</html>

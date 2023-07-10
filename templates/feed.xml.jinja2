@@ -1,0 +1,25 @@
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+    <channel>
+        <title>
+            <![CDATA[ {{ podcast.title }} ]]>
+        </title>
+        <description>
+            <![CDATA[ {{ podcast.subtitle }} ]]>
+        </description>
+        <link>{{ podcast.link }}</link>
+        <language>de-de</language>
+        <itunes:image href="{{ base_url }}/{{ podcast.id }}/cover.jpg"/>
+        {% for episode in podcast.episodes %}
+            <item>
+                <title> <![CDATA[ {{ episode.title }} ]]> </title>
+                <description> <![CDATA[ {{ episode.subtitle }} ]]></description>
+                <itunes:image href="{{ base_url }}/{{ podcast.id }}/{{ episode.id }}.jpg"/>
+                <pubDate>Wed, 14 Apr 2021 00:00:00 -0000</pubDate>
+                <enclosure url="{{ base_url }}/{{ podcast.id }}/{{ episode.id }}.mp3"
+                           type="audio/mpeg"
+                           length="{{ episode.bytes }}"/>
+                <guid isPermaLink="false">{{ episode.id }}</guid>
+            </item>
+        {% endfor %}
+    </channel>
+</rss>

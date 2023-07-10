@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ podcast['title'] }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/superkube@latest/dist/superkube.min.css">
+    <style>
+        .playbutton {
+        }
+
+        .playbutton:hover {
+            cursor: pointer;
+        }
+
+        .pausebutton {
+            cursor: pointer;
+            display: none;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".episode-card").forEach((episode) => {
+                episode.querySelector(".playbutton").addEventListener('click', () => {
+                    document.querySelectorAll(".episode-card").forEach((e) => {
+                        e.querySelector(".pausebutton").style.display = "none";
+                        e.querySelector(".playbutton").style.display = "block";
+                        e.querySelector("audio").pause()
+                    })
+                    episode.querySelector("audio").play();
+                    episode.querySelector(".playbutton").style.display = "none";
+                    episode.querySelector(".pausebutton").style.display = "block";
+                });
+                episode.querySelector(".pausebutton").addEventListener('click', () => {
+                    console.log(episode.id);
+                    episode.querySelector("audio").pause();
+                    episode.querySelector(".pausebutton").style.display = "none";
+                    episode.querySelector(".playbutton").style.display = "block";
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<nav class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="/" class="breadcrumb-link">Podcasts</a>
+        </li>
+        <li class="breadcrumb-item active">
+            <span class="breadcrumb-link">{{ podcast['title'] }}</span>
+        </li>
+    </ul>
+</nav>
+<main class="main">
+    <div class="hero bg-aluminum">
+        <div class="hero-container container centered edges pt-10 pb-10">
+            <div class="hero-icon mb-6">
+                <figure class="image-128">
+                    <img src="cover.jpg"/>
+                </figure>
+            </div>
+            <div class="hero-head">
+                <h1 class="heading-mega">{{ podcast['title'] }}</h1>
+            </div>
+            <div class="hero-body mt-3">
+                <p class="text-large text-dark-mid">{{ podcast['summary'] }}</p>
+            </div>
+            <div class="hero-body mt-3">
+                <script>window.podcastData = {
+                    "title": "{{ podcast['title'] }}",
+                    "subtitle": "{{ podcast['subtitle'] }}",
+                    "description": "{{ podcast['summary'] }}",
+                    "feeds": [{
+                        "type": "audio",
+                        "format": "mp3",
+                        "url": "{{ base_url }}/{{ podcast["id"] }}/feed.xml"
+                    }]
+                }
+                </script>
+                <script class="podlove-subscribe-button"
+                        src="https://cdn.podlove.org/subscribe-button/javascripts/app.js" data-language="de"
+                        data-size="big" data-json-data="podcastData" data-color="#ff8080" data-format="rectangle"
+                        data-style="outline"></script>
+                <noscript><a href="http://localhost">Subscribe to feed</a></noscript>
+            </div>
+        </div>
+    </div>
+    <div class="content py-15">
+        <div class="content-container container centered edges grid grid-3">
+            {% for episode in podcast['episodes'] %}
+                <div class="column card px-6 py-8 shadow-200 radius-large bg-light episode-card"
+                     id="{{ episode['id'] }}">
+                    <div class="card-icon mb-6 flex flex-between">
+                        <figure class="image-128">
+                            <img src="{{ episode['id'] }}.jpeg"/>
+                        </figure>
+                        <div class="item-column flex flex-column flex-around">
+                            <div class="item-column text-medium">
+                                {{ episode['date'] }}
+                            </div>
+                            <div class="item-column">
+                                <span class="icon icon-64 playbutton">
+                                <svg fill="#000000" height="800px" width="800px" version="1.1" id="Capa_1"
+                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     viewBox="0 0 60 60" xml:space="preserve">
+                                <g>
+                                    <path d="M45.563,29.174l-22-15c-0.307-0.208-0.703-0.231-1.031-0.058C22.205,14.289,22,14.629,22,15v30
+                                        c0,0.371,0.205,0.711,0.533,0.884C22.679,45.962,22.84,46,23,46c0.197,0,0.394-0.059,0.563-0.174l22-15
+                                        C45.836,30.64,46,30.331,46,30S45.836,29.36,45.563,29.174z M24,43.107V16.893L43.225,30L24,43.107z"/>
+                                    <path d="M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M30,58C14.561,58,2,45.439,2,30
+                                        S14.561,2,30,2s28,12.561,28,28S45.439,58,30,58z"/>
+                                </g>
+                                </svg>
+                                </span>
+                                <span class="icon icon-64 pausebutton">
+                                <svg fill="#000000" height="800px" width="800px" version="1.1" id="Capa_1"
+                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                     viewBox="0 0 60 60" xml:space="preserve">
+                                <g>
+                                    <path d="M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,30-30S46.542,0,30,0z M30,58C14.561,58,2,45.439,2,30
+                                        S14.561,2,30,2s28,12.561,28,28S45.439,58,30,58z"/>
+                                    <path d="M33,46h8V14h-8V46z M35,16h4v28h-4V16z"/>
+                                    <path d="M19,46h8V14h-8V46z M21,16h4v28h-4V16z"/>
+                                </g>
+                                </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-head">
+                        <a href="{{ episode['id'] }}.html">
+                            <h3 class="heading-medium">{{ episode['title'] }}</h3>
+                        </a>
+                    </div>
+                    <div class="card-body mt-2">
+                        <p class="text-medium">{{ episode['subtitle'] }}</p>
+                    </div>
+                    <audio id="{{ episode['id'] }}-player" src="{{ episode['id'] }}.mp3"></audio>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ podcast['title'] }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/superkube@latest/dist/superkube.min.css">
+</head>
+<body>
+<nav class="breadcrumb">
+    <ul class="breadcrumb-list">
+        <li class="breadcrumb-item">
+            <a href="/" class="breadcrumb-link">Podcasts</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="/{{ podcast['id'] }}" class="breadcrumb-link">{{ podcast['title'] }}</a>
+        </li>
+        <li class="breadcrumb-item active">
+            <span class="breadcrumb-link">{{ episode['title'] }}</span>
+        </li>
+    </ul>
+</nav>
+<main class="main">
+    <div class="hero bg-aluminum">
+        <div class="hero-container container centered edges pt-10 pb-10">
+            <div class="hero-icon mb-6">
+                <figure class="image-128">
+                    <img src="{{ episode['id'] }}.jpeg"/>
+                </figure>
+            </div>
+            <div class="hero-head">
+                <h1 class="heading-mega">{{ episode['title'] }}</h1>
+                <h3 class="heading-medium">{{ episode['subtitle'] }}</h3>
+            </div>
+        </div>
+    </div>
+    <div class="content py-5">
+        <div class="container centered edges">
+            <div class="hero-body mt-3 mb-5">
+                <p class="text-large text-dark-mid">{{ episode['summary'] }}</p>
+            </div>
+            <div class="hero-body  mt-3">
+                <audio class="centered" controls src="{{ episode['id'] }}.mp3"></audio>
+            </div>
+            {% if episode.shownotes %}
+                <hr/>
+                <div class="container-8 centered mt-5 p-5 bg-aluminum">
+                    {{ episode.shownotes }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</main>
+</body>
+</html>
