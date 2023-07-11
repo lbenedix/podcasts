@@ -1,0 +1,32 @@
+export default {
+    version: 5,
+    show: {
+        title: "{{ podcast.title }}",
+        subtitle: "{{ podcast.subtitle }}",
+        poster: "{{ base_url }}/{{ podcast.id }}/cover.jpg",
+        link: "{{ podcast['source_link'] }}",
+    },
+    title: "episode.title",
+    subtitle: "{{ episode.subtitle }}",
+    publicationDate: "{{ episode.pub_date }}",
+    duration: "{{ episode.length }}",
+    poster: "{{ base_url }}/{{ podcast.id }}/{{ episode.id }}.jpeg",
+    link: "{{ episode.source_link }}",
+    audio: [{
+        url: "{{ base_url }}/{{ podcast.id }}/{{ episode.id }}.mp3",
+        size: "{{ episode.bytes }}",
+        title: "MP3 Audio (mp3)",
+        mimeType: "audio/mpeg",
+    }],
+    files: [{
+        url: "{{ base_url }}/{{ podcast.id }}/{{ episode.id }}.mp3",
+        size: "{{ episode.bytes }}",
+        title: "MP3 Audio (mp3)",
+        mimeType: "audio/mpeg",
+    }],
+    contributors: [
+        {% for contributor in episode.participants -%}
+        {id: "{{ loop.index }}", name: "{{ contributor }}"},
+        {% endfor -%}
+    ]
+}

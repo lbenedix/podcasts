@@ -1,0 +1,5 @@
+export default [
+{% for chapter in episode['chapters'] -%}
+    {start: "{{ chapter['start'] }}", title: "{{ chapter['title'] }}"},
+{% endfor -%}
+]

@@ -74,6 +74,20 @@ def get_details(url, session):
     result['pub_date'] = utils.format_datetime(datetime.strptime(result['date'], "%d.%m.%Y"))
     result['tags'] = [x.strip() for x in soup.find("i", {'class': 'fa-v5-folder'}).parent.text.strip().split(',')]
 
+    # chapters
+    chapter_table = r.html.find('.media-chapters-table', first=True)
+    if chapter_table is not None:
+        logger.info('chapter marks!')
+        result['chapters'] = []
+        for chapter in chapter_table.find('.chapter-row'):
+            start = float(chapter.attrs.get('start-time'))
+            hours, remainder = divmod(start, 3600)
+            minutes, seconds = divmod(remainder, 60)
+            result['chapters'].append({
+                "start": f'{int(hours):02d}:{int(minutes):02d}:{int(seconds):02d}:000',
+                "title": chapter.find('.chapter-title', first=True).text,
+            })
+
     # lower your expectations
     if "Deutsch.png" in r.text:
         result['lang'] = 'de-de'
