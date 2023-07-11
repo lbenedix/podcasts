@@ -1,4 +1,4 @@
-export default {
+var episode = {
     version: 5,
     show: {
         title: "{{ podcast.title }}",
@@ -35,8 +35,17 @@ export default {
         {
             start: "{{ chapter.start }}",
             title: {{ chapter.title|tojson }},
+            href: "",
+            image: "",
         },
         {% endfor -%}
     ]
     {% endif -%}
 }
+
+var config = {
+  version: 5,
+  activeTab: "chapters",
+}
+
+window.podlovePlayer("#app", episode, config);
