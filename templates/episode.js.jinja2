@@ -6,8 +6,8 @@ export default {
         poster: "{{ base_url }}/{{ podcast.id }}/cover.jpg",
         link: "{{ podcast['source_link'] }}",
     },
-    title: "{{ episode.title }}",
-    subtitle: "{{ episode.subtitle }}",
+    title: {{ episode.title|tojson }},
+    subtitle: {{ episode.subtitle|tojson }},
     publicationDate: "{{ episode.pub_date }}",
     duration: "{{ episode.length }}",
     poster: "{{ base_url }}/{{ podcast.id }}/{{ episode.id }}.jpeg",
@@ -26,7 +26,7 @@ export default {
     }],
     contributors: [
         {% for contributor in episode.participants -%}
-        {id: "{{ loop.index }}", name: "{{ contributor }}"},
+        {id: "{{ loop.index }}", name: {{ contributor|tojson }}},
         {% endfor -%}
     ],
     {%  if episode.chapters %}
@@ -34,7 +34,7 @@ export default {
         {% for chapter in episode.chapters -%}
         {
             start: "{{ chapter.start }}",
-            title: "{{ chapter.title }}",
+            title: {{ chapter.title|tojson }},
         },
         {% endfor -%}
     ]
