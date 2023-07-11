@@ -26,7 +26,7 @@ export default {
     }],
     contributors: [
         {% for contributor in episode.participants -%}
-        {id: "{{ loop.index }}", name: {{ contributor|tojson }}},
+        {id: "{{ loop.index }}", name: {{ contributor|tojson }}, avatar: "/person.png"},
         {% endfor -%}
     ],
     {%  if episode.chapters %}
