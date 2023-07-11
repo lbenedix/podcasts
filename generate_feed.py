@@ -43,7 +43,7 @@ if __name__ == '__main__':
                     episode['bytes'] = os.stat(episode_mp3_path).st_size
                     hours, remainder = divmod(audio.info.length, 3600)
                     minutes, seconds = divmod(remainder, 60)
-                    episode['length'] = f'{int(hours):02d}:{int(minutes):02d}:{int(seconds):02d}:000'
+                    episode['length'] = f'{int(hours):02d}:{int(minutes):02d}:{int(seconds):02d}.000'
                 except HeaderNotFoundError:
                     logger.warning(f"can't get size of {episode_mp3_path}")
                     pass

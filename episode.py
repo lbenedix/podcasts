@@ -84,7 +84,7 @@ def get_details(url, session):
             hours, remainder = divmod(start, 3600)
             minutes, seconds = divmod(remainder, 60)
             result['chapters'].append({
-                "start": f'{int(hours):02d}:{int(minutes):02d}:{int(seconds):02d}:000',
+                "start": f'{int(hours):02d}:{int(minutes):02d}:{int(seconds):02d}.000',
                 "title": chapter.find('.chapter-title', first=True).text,
             })
 
