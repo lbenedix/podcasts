@@ -6,7 +6,7 @@ export default {
         poster: "{{ base_url }}/{{ podcast.id }}/cover.jpg",
         link: "{{ podcast['source_link'] }}",
     },
-    title: "episode.title",
+    title: "{{ episode.title }}",
     subtitle: "{{ episode.subtitle }}",
     publicationDate: "{{ episode.pub_date }}",
     duration: "{{ episode.length }}",
@@ -28,5 +28,15 @@ export default {
         {% for contributor in episode.participants -%}
         {id: "{{ loop.index }}", name: "{{ contributor }}"},
         {% endfor -%}
+    ],
+    {%  if episode.chapters %}
+    chapters: [
+        {% for chapter in episode.chapters -%}
+        {
+            start: "{{ chapter.start }}",
+            title: "{{ chapter.title }}",
+        },
+        {% endfor -%}
     ]
+    {% endif -%}
 }
