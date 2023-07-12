@@ -45,6 +45,21 @@
     <div class="hero-container container centered edges pt-10 pb-10">
         <div id="app"></div>
     </div>
+
+    <div class="content py-5">
+        <div class="container centered edges">
+            <div class="hero-body mt-3 mb-5">
+                <p class="text-large text-dark-mid">{{ episode['summary'] }}</p>
+            </div>
+            {% if episode.shownotes %}
+                <hr/>
+                <div class="container-8 centered mt-5 p-5 bg-aluminum">
+                    {{ episode.shownotes }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
     <script src="//cdn.podlove.org/web-player/5.x/embed.js"></script>
     <script src="{{ episode.id }}.js"></script>
     <noscript>
