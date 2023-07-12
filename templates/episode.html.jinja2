@@ -23,41 +23,42 @@
     </ul>
 </nav>
 <main class="main">
-    {#    <div class="hero bg-aluminum">#}
-    {#        <div class="hero-container container centered edges pt-10 pb-10">#}
-    {#            <div class="hero-icon mb-6">#}
-    {#                <figure class="image-128">#}
-    {#                    <img src="{{ episode['id'] }}.jpeg"/>#}
-    {#                </figure>#}
-    {#            </div>#}
-    {#            <div class="hero-head">#}
-    {#                <h1 class="heading-mega">{{ episode['title'] }}</h1>#}
-    {#                <h3 class="heading-medium">{{ episode['subtitle'] }}</h3>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#    </div>#}
-    <div id="app"></div>
+    <div class="hero-container container centered edges pt-10 pb-10">
+        <div id="app"></div>
+    </div>
     <script src="//cdn.podlove.org/web-player/5.x/embed.js"></script>
     <script src="{{ episode.id }}.js"></script>
     <noscript>
+        <div class="hero bg-aluminum">
+            <div class="hero-container container centered edges pt-10 pb-10">
+                <div class="hero-icon mb-6">
+                    <figure class="image-128">
+                        <img src="{{ episode['id'] }}.jpeg"/>
+                    </figure>
+                </div>
+                <div class="hero-head">
+                    <h1 class="heading-mega">{{ episode['title'] }}</h1>
+                    <h3 class="heading-medium">{{ episode['subtitle'] }}</h3>
+                </div>
+            </div>
+        </div>
+        <div class="content py-5">
+            <div class="container centered edges">
+                <div class="hero-body mt-3 mb-5">
+                    <p class="text-large text-dark-mid">{{ episode['summary'] }}</p>
+                </div>
+                <div class="hero-body  mt-3">
+                    <audio class="centered" controls src="{{ episode['id'] }}.mp3"></audio>
+                </div>
+                {% if episode.shownotes %}
+                    <hr/>
+                    <div class="container-8 centered mt-5 p-5 bg-aluminum">
+                        {{ episode.shownotes }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
     </noscript>
-
-    {#    <div class="content py-5">#}
-    {#        <div class="container centered edges">#}
-    {#            <div class="hero-body mt-3 mb-5">#}
-    {#                <p class="text-large text-dark-mid">{{ episode['summary'] }}</p>#}
-    {#            </div>#}
-    {#            <div class="hero-body  mt-3">#}
-    {#                <audio class="centered" controls src="{{ episode['id'] }}.mp3"></audio>#}
-    {#            </div>#}
-    {#            {% if episode.shownotes %}#}
-    {#                <hr/>#}
-    {#                <div class="container-8 centered mt-5 p-5 bg-aluminum">#}
-    {#                    {{ episode.shownotes }}#}
-    {#                </div>#}
-    {#            {% endif %}#}
-    {#        </div>#}
-    {#    </div>#}
 </main>
 </body>
 </html>
