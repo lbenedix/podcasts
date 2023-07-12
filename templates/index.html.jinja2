@@ -6,6 +6,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/superkube@latest/dist/superkube.min.css">
+    <style>
+        .label {
+            font-size: 8px;
+        }
+    </style>
+    {#    <script>#}
+    {#        const stringToColour = (str) => {#}
+    {#            var hash = 0;#}
+    {#            str.split('').forEach(char => {#}
+    {#                hash = char.charCodeAt(0) + ((hash << 5) - hash)#}
+    {#            })#}
+    {#            let colour = '#'#}
+    {#            for (let i = 0; i < 3; i++) {#}
+    {#                const value = (hash >> (i * 8)) & 0xff#}
+    {#                colour += value.toString(16).padStart(2, '0')#}
+    {#            }#}
+    {#            return colour#}
+    {#        }#}
+    {##}
+    {#        function brightnessByColor(color) {#}
+    {#            var color = "" + color, isHEX = color.indexOf("#") == 0, isRGB = color.indexOf("rgb") == 0;#}
+    {#            if (isHEX) {#}
+    {#                var m = color.substr(1).match(color.length == 7 ? /(\S{2})/g : /(\S{1})/g);#}
+    {#                if (m) var r = parseInt(m[0], 16), g = parseInt(m[1], 16), b = parseInt(m[2], 16);#}
+    {#            }#}
+    {#            if (isRGB) {#}
+    {#                var m = color.match(/(\d+){3}/g);#}
+    {#                if (m) var r = m[0], g = m[1], b = m[2];#}
+    {#            }#}
+    {#            if (typeof r != "undefined") return ((r * 299) + (g * 587) + (b * 114)) / 1000;#}
+    {#        }#}
+    {##}
+    {#        document.addEventListener("DOMContentLoaded", () => {#}
+    {#            document.querySelectorAll(".label").forEach((label) => {#}
+    {#                var bg = stringToColour(label.textContent)#}
+    {#                label.style.backgroundColor = bg;#}
+    {#                if (brightnessByColor(bg) < 120) {#}
+    {#                    label.style.color = "white";#}
+    {#                } else {#}
+    {#                    label.style.color = "black";#}
+    {#                }#}
+    {#            });#}
+    {#        });#}
+    {#    </script>#}
 </head>
 <body>
 
@@ -33,21 +77,33 @@
     <div class="content py-15">
         <div class="content-container container centered edges grid grid-3">
             {% for podcast in podcasts %}
-                <div class="column card px-6 py-8 shadow-200 radius-large bg-light">
-                    <div class="card-icon mb-6">
-                        <figure class="image-128">
-                            <img src="{{ podcast['id'] }}/cover.jpg"/>
-                        </figure>
+                <div class="column card px-6 py-8 shadow-200 radius-large bg-light flex flex-column flex-between">
+                    <div class="flex flex-between">
+                        <div class="card-icon mb-6">
+                            <a href="{{ podcast['id'] }}">
+
+                                <figure class="image-128">
+                                    <img src="{{ podcast['id'] }}/cover.jpg"/>
+                                </figure>
+                            </a>
+                        </div>
+                        {#                        <div class="flex flex-column">#}
+                        {#                            {% for tag in podcast.tags -%}#}
+                        {#                                <span class="label mt-3">{{ tag }}</span>#}
+                        {#                            {% endfor -%}#}
+                        {#                        </div>#}
                     </div>
                     <div class="card-head">
                         <a href="{{ podcast['id'] }}">
                             <h3 class="heading-medium">{{ podcast['title'] }}</h3>
                         </a>
                     </div>
+
                 </div>
             {% endfor %}
         </div>
     </div>
+
 </main>
 </body>
 </html>
