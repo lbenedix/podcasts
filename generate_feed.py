@@ -57,7 +57,7 @@ if __name__ == '__main__':
                 #  write chapter mark files
                 if episode.get('chapters') is not None:
                     # txt
-                    chapter_txt_path = Path(p.parent / f"{episode['id']}_chapters.txt")
+                    chapter_txt_path = Path(p.parent / f"{episode['id']}.chapters.txt")
                     chapter_txt_path.open("w").write(
                         chapter_txt_template.render(episode=episode)
                     )
