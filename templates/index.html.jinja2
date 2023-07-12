@@ -9,15 +9,27 @@
 </head>
 <body>
 
-<nav class="breadcrumb">
-    <ul class="breadcrumb-list">
-        <li class="breadcrumb-item active">
-            <span class="breadcrumb-link">Podcasts</span>
-        </li>
-    </ul>
-</nav>
+<div class="navbar bg-dark hidden-sm">
+    <div class="navbar-container container centered edges">
+        <div class="navbar-brand">
+            <a href="/" class="brand">
+                <h2 class="heading-large heading-light">Podcasts</h2>
+            </a>
+        </div>
+    </div>
+</div>
 
 <main class="main">
+    <div class="hero-container container centered edges pt-5 pb-5">
+        <nav class="breadcrumb">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item active">
+                    <span class="breadcrumb-link">Podcasts</span>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
     <div class="content py-15">
         <div class="content-container container centered edges grid grid-3">
             {% for podcast in podcasts %}
